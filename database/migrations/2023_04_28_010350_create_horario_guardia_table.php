@@ -13,7 +13,7 @@ class CreateHorarioGuardiaTable extends Migration
      */
     public function up()
     {
-        Schema::create('horarios_guardias', function (Blueprint $table) {
+        Schema::create('horario_guardias', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('id_usuario');
             $table->foreign('id_usuario')->references('id')->on('usuarios')
