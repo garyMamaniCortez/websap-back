@@ -87,7 +87,9 @@ class UsuarioController extends Controller
         }
         $usuario = $usuarios->first();
         if ($contraseña == $usuario->contraseña){
-            return response()->json(['mensaje' => 'Inicio de sesión exitoso']);;
+            return response()->json(['mensaje' => 'Inicio de sesión exitoso',
+                                     'tipo_usuario' => $usuario->tipo_usuario
+                                    ]);
         } else{
             return response()->json(['error' => 'Credenciales incorrectas'], 401);
         }
