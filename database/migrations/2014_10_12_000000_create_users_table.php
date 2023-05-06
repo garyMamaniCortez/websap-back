@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->integer('ci');
             $table->integer('celular');
-            $table->string('contaseña');
+            $table->string('contraseña');
             $table->string('tipo_usuario');
             $table->rememberToken();
             $table->timestamps();
@@ -34,6 +34,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('usuarios');
     }
 }
