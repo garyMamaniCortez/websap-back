@@ -35,8 +35,6 @@ To start the proyect you would have to do the following things:
 * create a database "parqueoumss"
 * update the .env file where "DB_CONNECTION=mysql" with : 
 ```
-DB_DATABASE=parqueoumss
-DB_USERNAME=root
 DB_PASSWORD={your_password}
 ```
 * Execute the following commands in order
