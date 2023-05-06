@@ -13,7 +13,7 @@ class CreateHorarioParqueoTable extends Migration
      */
     public function up()
     {
-        Schema::create('horarios_parqueos', function (Blueprint $table) {
+        Schema::create('horario_parqueos', function (Blueprint $table) {
             $table->id();
             $table->string('dia');
             $table->time('hora_ini');
