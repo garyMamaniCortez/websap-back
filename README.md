@@ -42,8 +42,8 @@ DB_PASSWORD={your_password}
 * Execute the following commands in order
 ```
 composer install
-php artisan serve
 php artisan migrate --seed
+php artisan serve
 ```
 ## To create models, Controllers and populate the DB
 ```
