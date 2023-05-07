@@ -25,6 +25,22 @@ class TarifaController extends Controller
         return $tarifas;
     }
 
+    public function last()
+    {
+        $ultima_tarifa = DB::table('tarifas')
+                            ->orderBy('id','desc')
+                            ->get();
+
+        try {
+            if (!$ultima_tarifa->isEmpty())
+                return response()->json($ultima_tarifa->first(),200);
+            else
+                return response()->json(['error' => 'No hay tarifas registradas'],400);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'No hay tarifas registradas'], 400);
+        }
+    }
+
     /**
      * Store a newly created resource in storage.
      *

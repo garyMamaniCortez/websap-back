@@ -39,4 +39,5 @@ Route::post('/horario/guardia', [HorarioGuardiaController::class, 'store']);
 //Route::put('/horario/guardia/{id}', [HorarioGuardiaController::class, 'update']);
 
 Route::post('/tarifa', [TarifaController::class, 'store']);
+Route::get('/tarifa', [TarifaController::class, 'last']);
 Route::get('/tarifas', [TarifaController::class, 'index']);
