@@ -18,19 +18,13 @@ class CreateRegistroPagoTable extends Migration
             $table->unsignedBigInteger('id_reserva');
             $table->foreign('id_reserva')->references('id')->on('reservas')
                                                             ->onUpdate('cascade')
-                                                            ->onDelete('cascade')
-                                                            ->nullable();
+                                                            ->onDelete('cascade');
             $table->decimal('monto');
             $table->date('fecha_pago');
             $table->unsignedBigInteger('id_usuario');
             $table->foreign('id_usuario')->references('id')->on('usuarios')
                                                             ->onUpdate('cascade')
                                                             ->onDelete('cascade');
-            $table->unsignedBigInteger('id_registro_parqueo');
-            $table->foreign('id_registro_parqueo')->references('id')->on('registro_parqueos')
-                                                                ->onUpdate('cascade')
-                                                                ->onDelete('cascade')
-                                                                ->nullable();
             $table->timestamps();
         });
     }
