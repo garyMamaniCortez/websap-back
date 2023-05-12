@@ -32,6 +32,8 @@ Route::post('/reserva', [ReservasController::class, 'store']);
 Route::put('/reserva/{id}', [ReservasController::class, 'update']);
 
 Route::put('/sitio/{id}', [SitioController::class, 'update']);
+Route::get('/sitio/{id}', [SitioController::class, 'show']);
+Route::get('/sitios', [SitioController::class, 'index']);
 
 Route::get('/horario/guardia', [HorarioGuardiaController::class, 'index']);
 //Route::get('/horario/guardia/{id}', [HorarioGuardiaController::class, 'show']);

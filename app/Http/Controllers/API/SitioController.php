@@ -37,7 +37,8 @@ class SitioController extends Controller
      */
     public function show($id)
     {
-        //
+        $sitio = Sitio::find($id);
+        return response()->json($sitio);
     }
 
     /**
