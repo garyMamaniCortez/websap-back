@@ -21,7 +21,7 @@ class ReservasController extends Controller
         {
             $reserva = $this->translateFechaFin($reserva);
         }
-        return $reservas;
+        return response()->json($reservas,200);
     }
 
     /**
