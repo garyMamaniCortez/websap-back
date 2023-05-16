@@ -44,15 +44,28 @@ class DatabaseSeeder extends Seeder
                 'ocupado' => 0
             ]
         ]);
-        DB::table('reservas')->insert([
+        DB::table('clientes')->insert([
             [
                 'nombre_cliente' => 'Joselito',
-                'fecha_ini' => now(),
                 'codigo_sis' => 201900402,
                 'email' => 'gary.mamani@gmail.com',
                 'matricula' => '1234ABC',
                 'celular' => 65385951,
+            ]
+        ]);
+        DB::table('reservas')->insert([
+            [
+                'cliente' => 1,
+                'fecha_ini' => now(),
                 'sitio' => 1
+            ]
+        ]);
+        DB::table('registro_pagos')->insert([
+            [
+                'id_reserva' => 1,
+                'monto' => 2,
+                'fecha_pago' => now(),
+                'id_usuario' => 1
             ]
         ]);
     }

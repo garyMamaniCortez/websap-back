@@ -32,16 +32,19 @@ class ReservasController extends Controller
      */
     public function store(Request $request)
     {
-        $response = updateSitio(1, $request->input('sitio'));
+        $response = $this->updateSitio(1, $request->input('sitio'));
 
         $reserva = new Reserva;
-        $reserva->nombre_cliente = $request->input('nombre_cliente');
+
+        $reserva->cliente = $this->getCliente($request->input('nombre_cliente'),
+                                                $request->input('codigo_sis'),
+                                                $request->input('email'),
+                                                $request->input('celular'),
+                                                $request->input('matricula')
+                                            );
+
         $reserva->fecha_ini = $request->input('fecha_ini');
         $reserva->fecha_fin  = $request->input('fecha_fin');
-        $reserva->codigo_sis  = $request->input('codigo_sis');
-        $reserva->email  = $request->input('email');
-        $reserva->matricula  = $request->input('matricula');
-        $reserva->celular  = $request->input('celular');
         $reserva->sitio  = $request->input('sitio');
 
         try {
@@ -74,16 +77,18 @@ class ReservasController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
+    {//falta actualizar
         $reserva = Reserva::findOrFail($id);
 
-        $reserva->nombre_cliente = $request->input('nombre_cliente');
+        $reserva->cliente = $this->getCliente($request->input('nombre_cliente'),
+                                                $request->input('codigo_sis'),
+                                                $request->input('email'),
+                                                $request->input('celular'),
+                                                $request->input('matricula')
+                                            );
+
         $reserva->fecha_ini = $request->input('fecha_ini');
         $reserva->fecha_fin  = $request->input('fecha_fin');
-        $reserva->codigo_sis  = $request->input('codigo_sis');
-        $reserva->email  = $request->input('email');
-        $reserva->matricula  = $request->input('matricula');
-        $reserva->celular  = $request->input('celular');
 
         if ($reserva->sitio != $request->input('sitio'))
         {
@@ -118,6 +123,7 @@ class ReservasController extends Controller
         $response = $sitio_controller->update(new Request($ocupado), $id_sitio);
         return $response;
     }
+
     private function translateFechaFin($reserva)
     {
         if ($reserva->fecha_fin == null)
@@ -125,5 +131,26 @@ class ReservasController extends Controller
             $reserva->fecha_fin = "Indefinido";
         }
         return $reserva;
+    }
+
+    private function getCliente($nombre_cliente,$codigo_sis,$email,$celular,$matricula)
+    {
+        $cliente_controller = new ClienteController();
+        $cliente_id = $cliente_controller->getByCodSis($codigo_sis);
+
+        $request = ['nombre_cliente' => $nombre_cliente,
+                    'codigo_sis' => $codigo_sis,
+                    'email' => $email,
+                    'matricula' => $matricula,
+                    'celular' => $celular
+                    ];
+        if ($cliente_id == null)
+        {
+            $cliente_id = $cliente_controller->store(new Request($request));
+        }else
+        {
+            $cliente =$cliente_controller->update(new Request($request), $cliente_id);
+        }
+        return $cliente_id;
     }
 }
