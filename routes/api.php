@@ -5,6 +5,8 @@ use App\Http\Controllers\API\ReservasController;
 use App\Http\Controllers\API\SitioController;
 use App\Http\Controllers\API\HorarioGuardiaController;
 use App\Http\Controllers\API\TarifaController;
+use App\Http\Controllers\API\RegistroPagosController;
+use App\Http\Controllers\API\ClienteController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -31,6 +33,8 @@ Route::get('/reservas/{id}', [ReservasController::class, 'show']);
 Route::post('/reserva', [ReservasController::class, 'store']);
 Route::put('/reserva/{id}', [ReservasController::class, 'update']);
 
+Route::get('/registropagos/deudas', [RegistroPagosController::class, 'deudas']);
+
 Route::put('/sitio/{id}', [SitioController::class, 'update']);
 Route::get('/sitio/{id}', [SitioController::class, 'show']);
 Route::get('/sitios', [SitioController::class, 'index']);
@@ -43,3 +47,8 @@ Route::post('/horario/guardia', [HorarioGuardiaController::class, 'store']);
 Route::post('/tarifa', [TarifaController::class, 'store']);
 Route::get('/tarifa', [TarifaController::class, 'last']);
 Route::get('/tarifas', [TarifaController::class, 'index']);
+
+
+Route::get('/cliente/{id}', [ClienteController::class, 'show']);
+Route::put('/cliente/{id}', [ClienteController::class, 'update']);
+Route::delete('/cliente/{id}', [ClienteController::class, 'destroy']);

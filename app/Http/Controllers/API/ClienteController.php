@@ -50,7 +50,8 @@ class ClienteController extends Controller
      */
     public function show($id)
     {
-        //
+        $cliente = Cliente::find($id);
+        return response()->json($cliente);
     }
 
     /**
@@ -86,7 +87,14 @@ class ClienteController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $cliente = Cliente::find($id);
+
+        if ($cliente) {
+            $cliente->delete();
+            return response()->json(['mensaje' => 'Registro de Cliente eliminado correctamente']);
+        } else {
+            return response()->json(['error' => 'El registro de Cliente no existe'], 404);
+        }
     }
 
     public function getByCodSis($codigo_sis)
